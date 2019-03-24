@@ -19,10 +19,9 @@ public class principal {
         int numB[];
         int soma[];
         
-        numA = iniciaReg(5);
-        numB = iniciaReg(3);
+        numA = iniciaReg(10);
         
-        numA = potenReg(numA, numB);
+        numA = fatReg(numA);
 
         System.out.println(numA[1]);
     }
@@ -237,6 +236,27 @@ public class principal {
                 C[1] = multReg(C, D)[1];
             }
         }
+        return C;
+    }
+    
+    private static int[] fatReg(int[] A){
+        int[] C = new int[2];
+        int[] D = new int[2];
+        C[1] = D[1] = 0;
+        
+        while(true){
+            if(A[1] == 0) break;
+            A[1]--;
+            C[1]++;
+            D[1]++;
+        }
+        D[1]--;
+        while(true){
+            if(D[1] == 0) break;
+            C[1] = multReg(C,D)[1];
+            D[1]--;
+        }
+        
         return C;
     }
     
