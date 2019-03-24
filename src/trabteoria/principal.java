@@ -20,10 +20,11 @@ public class principal {
         int soma[];
         
         numA = iniciaReg(5);
-        numB = iniciaReg(4);
+        numB = iniciaReg(3);
+        
+        numA = potenReg(numA, numB);
 
-        if(compReg(numA,numB) == 0) System.out.println("A é maior");
-            else System.out.println("B é maior");
+        System.out.println(numA[1]);
     }
     
     private static int[] iniciaReg(int num){
@@ -214,6 +215,29 @@ public class principal {
         }else
             A[0]=1;
         return A;
+    }
+    
+    private static int[] potenReg(int[]A, int[] B){
+        int[] C = new int[2];
+        int[] D = new int[2];
+        
+        C[1] = 0;
+        D[1] = 0;
+        
+        if(A[0] == 0){  //A positivo
+            while(true){
+                C[1]++;    
+                D[1]++;    
+                A[1]--;
+                if(A[1]==0)break;
+            }
+            while(true){
+                B[1]--;
+                if(B[1]==0)break;
+                C[1] = multReg(C, D)[1];
+            }
+        }
+        return C;
     }
     
 }
