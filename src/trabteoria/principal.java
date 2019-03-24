@@ -19,8 +19,8 @@ public class principal {
         int numB[];
         int soma[];
         
-        numA = iniciaReg(-5);
-        numB = iniciaReg(-4);
+        numA = iniciaReg(5);
+        numB = iniciaReg(4);
 
         if(compReg(numA,numB) == 0) System.out.println("A é maior");
             else System.out.println("B é maior");
@@ -30,11 +30,11 @@ public class principal {
         int auxNum[] = new int[2];
         
         if(num >= 0){
-            auxNum[0] = 1;
+            auxNum[0] = 0;
             auxNum[1] = num;
         }
         else{
-            auxNum[0] = 0;
+            auxNum[0] = 1;
             auxNum[1] = Math.abs(num);
         }
 
@@ -42,7 +42,7 @@ public class principal {
     }
     
     private static int[] somaReg(int[] A, int [] B){
-        if(A[0] == 0 && B[0] == 0){  //dois negativos
+        if(A[0] == 0 && B[0] == 0){  //dois positivos
             while(true){
                 if(B[1] == 0) break;
                 A[1]++;
@@ -52,7 +52,7 @@ public class principal {
         }
         
         if(A[0] == 0 || B[0] == 0){  //um positivo
-            if(B[0] == 0){   //B negativo
+            if(B[0] == 0){   //B positivo
                 while(true){
                     if(B[1] == 0) break;
                     A[1]--;
@@ -67,7 +67,7 @@ public class principal {
                     }
                 }
                 return A;
-            }else{   //A negativo
+            }else{   //A positivo
                 while(true){
                     if(B[1] == 0) break;
                     A[1]--;
@@ -85,7 +85,7 @@ public class principal {
             }
         }
         
-        while(true){    //dois negativos
+        while(true){    //dois positivos
                 if(B[1] == 0) break;
                 A[1]++;
                 B[1]--;
@@ -94,32 +94,32 @@ public class principal {
     }
     
     private static short compReg(int[] A, int [] B){    //se 0 A é maior, se 1 B é maior
-        if(A[0] == 0 && B[0] == 0){ //dois negativos
+        if(A[0] == 0 && B[0] == 0){ //dois positivos
             while(true){
                 A[1]--;
                 B[1]--;
-                if(A[1] == 0) return 0; //A é maior
-                if(B[1] == 0) return 1; //B é maior
+                if(A[1] == 0) return 1; //A é maior
+                if(B[1] == 0) return 0; //B é maior
             }
         }
         
         if(A[0] == 0 || B[0] == 0){  //um dos dois é negativo
-            if(A[0] == 0) return 1;
-            else return 0;
+            if(A[0] == 1) return 0;
+            else return 1;
         }
         
-        while(true){
+        while(true){    //dois negativos
             A[1]--;
             B[1]--;
-            if(A[1] == 0) return 1; //B é maior
-            if(B[1] == 0) return 0; //A é maior
+            if(A[1] == 0) return 0; //A é maior
+            if(B[1] == 0) return 1; //B é maior
         }
     }
     
     private static int[] somaRegP(int[] A, int [] B){
         int C = 0;
         
-        if(A[0] == 0 && B[0] == 0){  //dois negativos
+        if(A[0] == 0 && B[0] == 0){  //dois positivos
             while(true){
                 if(B[1] == 0) break;
                 C++;
@@ -135,7 +135,7 @@ public class principal {
         }
         
         if(A[0] == 0 || B[0] == 0){  //um positivo
-            if(B[0] == 0){   //B negativo
+            if(B[0] == 0){   //B positivo
                 while(true){
                     if(B[1] == 0) break;
                     A[1]--;
@@ -157,7 +157,7 @@ public class principal {
                     B[1]++;
                 }
                 return A;
-            }else{   //A negativo
+            }else{   //A positivo
                 while(true){
                     if(B[1] == 0) break;
                     A[1]--;
@@ -182,7 +182,7 @@ public class principal {
             }
         }
         
-        while(true){    //dois negativos
+        while(true){    //dois positivos
                 if(B[1] == 0) break;
                 A[1]++;
                 B[1]--;
@@ -193,6 +193,26 @@ public class principal {
             C--;
             B[1]++;
         }
+        return A;
+    }
+
+    private static int[] multReg(int[]A, int[] B){
+        int C[] = new int[2];
+        C[1]=0;
+        while(true){
+            C[1]++;
+            A[1]--;
+            if(A[1]==0)break;
+        }
+        while(true){
+            A[1]=A[1]+B[1];
+            C[1]--;
+            if(C[1]==0)break;
+        }
+        if((A[0] == 0 && B[0] == 0)||(A[0] == 1 && B[0] == 1)){
+            A[0]=0;
+        }else
+            A[0]=1;
         return A;
     }
     
