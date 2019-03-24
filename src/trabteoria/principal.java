@@ -115,4 +115,85 @@ public class principal {
             if(B[1] == 0) return 0; //A é maior
         }
     }
+    
+    private static int[] somaRegP(int[] A, int [] B){
+        int C = 0;
+        
+        if(A[0] == 0 && B[0] == 0){  //dois negativos
+            while(true){
+                if(B[1] == 0) break;
+                C++;
+                A[1]++;
+                B[1]--;
+            }
+            while(true){
+                if(C == 0) break;
+                C--;
+                B[1]++;
+            }
+            return A;
+        }
+        
+        if(A[0] == 0 || B[0] == 0){  //um positivo
+            if(B[0] == 0){   //B negativo
+                while(true){
+                    if(B[1] == 0) break;
+                    A[1]--;
+                    B[1]--;
+                    C++;
+                    if(A[1] == 0){
+                        A[0]--;
+                        while(true){
+                            if(B[1] == 0) break;
+                            C++;
+                            A[1]++;
+                            B[1]--;
+                        }
+                    }
+                }
+                while(true){
+                    if(C == 0) break;
+                    C--;
+                    B[1]++;
+                }
+                return A;
+            }else{   //A negativo
+                while(true){
+                    if(B[1] == 0) break;
+                    A[1]--;
+                    B[1]--;
+                    C++;
+                    if(A[1] == 0){
+                        A[0]++;
+                        while(true){
+                            if(B[1] == 0) break;
+                            A[1]++;
+                            B[1]--;
+                            C++;
+                        }
+                    }
+                }
+                while(true){
+                    if(C == 0) break;
+                    C--;
+                    B[1]++;
+                }
+                return A;
+            }
+        }
+        
+        while(true){    //dois negativos
+                if(B[1] == 0) break;
+                A[1]++;
+                B[1]--;
+                C++;
+            }
+        while(true){
+            if(C == 0) break;
+            C--;
+            B[1]++;
+        }
+        return A;
+    }
+    
 }
