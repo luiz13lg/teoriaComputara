@@ -17,12 +17,11 @@ public class principal {
     public static void main(String[] args) {
         int numA[];
         int numB[];
-        int soma[];
         
-        numA = iniciaReg(-10);
-        numB = iniciaReg(4);
+        numA = iniciaReg(10);
+        numB = iniciaReg(6);
         
-        numA = potenReg(numA, numB);
+        numA = restoDivReg(numA, numB);
 
         System.out.println(numA[0]);
         System.out.println(numA[1]);
@@ -87,7 +86,7 @@ public class principal {
             }
         }
         
-        while(true){    //dois positivos
+        while(true){    //dois negativos
                 if(B[1] == 0) break;
                 A[1]++;
                 B[1]--;
@@ -215,6 +214,62 @@ public class principal {
             A[0]=0;
         }else
             A[0]=1;
+        return A;
+    }
+
+    private static int[] restoDivReg(int[]A, int[] B){
+        
+    }
+    
+    private static int[] subReg(int[] A, int[] B){
+        if(A[0] == 0 && B[0] == 0){  //dois positivos
+            while(true){
+                if(B[1] == 0) break;
+                A[1]--;
+                B[1]--;
+                if(A[1] == 0){
+                    A[0]++;
+                    while(true){
+                        A[1]++;
+                        B[1]--;
+                        if(B[1] == 0) break;
+                    }
+                    break;
+                }
+            }
+            return A;
+        }
+        
+        if(A[0] == 0 || B[0] == 0){  //um positivo
+            if(B[0] == 0){   //B positivo
+                while(true){
+                    if(B[1] == 0) break;
+                    A[1]++;
+                    B[1]--;
+                    }
+                return A;
+            }else{   //A positivo
+                while(true){
+                    if(B[1] == 0) break;
+                    A[1]++;
+                    B[1]--;
+                    }
+                return A;
+            }    
+        }
+        while(true){    //dois negativos
+            if(B[1] == 0) break;
+            A[1]--;
+            B[1]--;
+            if(A[1] == 0){
+                A[0]--;
+                while(true){
+                    A[1]++;
+                    B[1]--;
+                    if(B[1] == 0) break;
+                }
+            }
+        }
         return A;
     }
     
