@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package trabteoria;
 
 /**
  *
- * @author Luiz
+ * @author Luiz & Coutoboy
  */
 public class principal {
 
@@ -18,8 +13,8 @@ public class principal {
         int numA[];
         int numB[];
         
-        numA = iniciaReg(10);
-        numB = iniciaReg(6);
+        numA = iniciaReg(6);
+        numB = iniciaReg(5);
         
         numA = restoDivReg(numA, numB);
 
@@ -94,7 +89,7 @@ public class principal {
         return A;
     }
     
-    private static short compReg(int[] A, int [] B){    //se 0 A é maior, se 1 B é maior
+    private static short compReg(int[] A, int [] B){    //se 0 A é maior, se 1 B é maior     
         if(A[0] == 0 && B[0] == 0){ //dois positivos
             while(true){
                 A[1]--;
@@ -105,8 +100,8 @@ public class principal {
         }
         
         if(A[0] == 0 || B[0] == 0){  //um dos dois é negativo
-            if(A[0] == 1) return 0;
-            else return 1;
+            if(A[0] == 1) return 1;
+            else return 0;
         }
         
         while(true){    //dois negativos
@@ -218,7 +213,98 @@ public class principal {
     }
 
     private static int[] restoDivReg(int[]A, int[] B){
+        int auxA[],auxB[], aux2A[], aux2B[];
         
+        auxA = copiaReg(A);
+        auxB = copiaReg(B);
+        
+        if(compReg(auxA, auxB) == 0){   //A maior que B
+            if(A[0] == 0 && B[0] == 0)  //dois positivos
+                while(true){    
+                    A = subReg(A, B);
+                    aux2A = copiaReg(A);
+                    aux2B = copiaReg(B);
+                    if(compReg(aux2A, aux2B) == 0) continue;
+                    else{
+                        A = somaReg(A, B);
+                        return A;
+                    }
+                }
+            else if(A[0] == 0){ // B negativo
+                B[0]--;
+                while(true){
+                    A = subReg(A, B);
+                    aux2A = copiaReg(A);
+                    aux2B = copiaReg(B);
+                    if(compReg(aux2A, aux2B) == 0) continue;
+                    else{
+                        A = somaReg(A, B);
+                        A[0]++;
+                        return A;
+                    }
+                }
+            }
+        }
+        else{  //B maior que A
+            if(A[0] == 0)   //A positivo menor que B
+                return A;
+            else if(B[0] == 0){   //A negativo B positivo
+                A[0]--;
+                while(true){
+                    A = subReg(A, B);
+                    aux2A = copiaReg(A);
+                    aux2B = copiaReg(B);
+                    if(compReg(aux2A, aux2B) == 0) continue;
+                    else{
+                        A = somaReg(A, B);
+                        A[0]++;
+                        return A;
+                    }
+                }
+            }
+            else{   //dois negativos
+                A[0]--; B[0]--;
+                while(true){
+                    A = subReg(A, B);
+                    aux2A = copiaReg(A);
+                    aux2B = copiaReg(B);
+                    if(compReg(aux2A, aux2B) == 0) continue;
+                    else{
+                        A = somaReg(A, B);
+                        A[0]++;
+                        return A;
+                    }
+                }
+            }
+        }
+        return A;
+    }
+    
+    private static int[] copiaReg(int[] A){
+        int[] a = new int [2];
+        int[] aa = new int [2];
+        a[0] = aa[0] = a[1] = aa[1] = 0;
+        
+        if(A[0] == 0){
+            a[0] = 0;
+        } else{
+            a[0]++;
+        }
+        
+        while(true){
+            if(A[1] == 0) break;
+            a[1]++;
+            aa[1]++;
+            A[1]--;
+        }
+        
+        while(true){
+            if(aa[1]==0) break;
+            A[1]++;
+            aa[1]--;
+        }
+        
+        return a;
     }
     
     private static int[] subReg(int[] A, int[] B){
