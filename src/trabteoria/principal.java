@@ -423,5 +423,20 @@ public class principal {
         
         return C;
     }
+    
+    private static int[] AtoB(int[] A,int[] B){
+        A[1] = 0;
+        A = somaRegP(A, B);
+        return B;
+    }
+    
+    private static int[] zerarReg(int[] A){
+        A[0] = 0;
+        while(true){
+            A[1]--;
+            if(A[1]==0)break;
+        }
+        return A;
+    }
         
 }
