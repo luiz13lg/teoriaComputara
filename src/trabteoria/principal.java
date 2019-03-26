@@ -13,13 +13,11 @@ public class principal {
         int numA[];
         int numB[];
         
-        numA = iniciaReg(11);
+        numA = iniciaReg(31);
         numB = iniciaReg(2);
         
-        numA = restoDivReg(numA, numB);
-
-        System.out.println(numA[0]);
-        System.out.println(numA[1]);
+        if(primoReg(numA) == 0) System.out.println("É primo!");
+        else System.out.println("Não é primo!");
     }
     
     private static int[] iniciaReg(int num){
@@ -437,6 +435,32 @@ public class principal {
             if(A[1]==0)break;
         }
         return A;
+    }
+    
+    private static int primoReg(int[] A){
+        int [] auxA;
+        int [] divisor = new int[2];
+        int [] auxDivisor = new int[2];
+        
+        auxA = copiaReg(A);
+        divisor[0] = divisor[1] = 0;
+        
+        divisor[1]++;       // comecando divisor com 2
+        divisor[1]++;       //
+        auxDivisor[1]++;    //
+        auxDivisor[1]++;    //
+        
+        if(restoDivReg(A,divisor)[1] == 0) return 1;        //divindo por 2
+
+        while(true){    //apenas divisoes com impares
+            divisor[1]++;       //incrementa o divisor ímpar
+            auxDivisor = copiaReg(divisor); //restaura para comparacao
+            if(compReg(auxDivisor,auxA) == 0) break;    //se divisor maior que o numero testado
+            if(restoDivReg(A,divisor)[1] == 0) return 1;    //divisao c/ resto 0
+            divisor[1]++;       //incrementa o divisor par
+            auxA = copiaReg(A); //restaurando valor da auxiliar
+        }
+        return 0;   //é primo
     }
         
 }
