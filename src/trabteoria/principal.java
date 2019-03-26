@@ -13,8 +13,8 @@ public class principal {
         int numA[];
         int numB[];
         
-        numA = iniciaReg(6);
-        numB = iniciaReg(5);
+        numA = iniciaReg(11);
+        numB = iniciaReg(2);
         
         numA = restoDivReg(numA, numB);
 
@@ -89,13 +89,14 @@ public class principal {
         return A;
     }
     
-    private static short compReg(int[] A, int [] B){    //se 0 A é maior, se 1 B é maior     
+    private static short compReg(int[] A, int [] B){    //se 0 A é maior ou igual, se 1 B é maior     
         if(A[0] == 0 && B[0] == 0){ //dois positivos
             while(true){
                 A[1]--;
                 B[1]--;
-                if(A[1] == 0) return 1; //A é maior
-                if(B[1] == 0) return 0; //B é maior
+                if(A[1] == 0 && B[1] == 0) return 0; //iguais
+                if(A[1] == 0) return 1; //B é maior
+                if(B[1] == 0) return 0; //A é maior
             }
         }
         
@@ -107,8 +108,9 @@ public class principal {
         while(true){    //dois negativos
             A[1]--;
             B[1]--;
-            if(A[1] == 0) return 0; //A é maior
-            if(B[1] == 0) return 1; //B é maior
+            if(A[1] == 0 && B[1] == 0) return 0;
+            else if(A[1] == 0) return 0; //A é maior
+                else return 1; //B é maior
         }
     }
     
@@ -219,17 +221,18 @@ public class principal {
         auxB = copiaReg(B);
         
         if(compReg(auxA, auxB) == 0){   //A maior que B
-            if(A[0] == 0 && B[0] == 0)  //dois positivos
-                while(true){    
-                    A = subReg(A, B);
+            if(A[0] == 0 && B[0] == 0){  //dois positivos
+                while(true){
                     aux2A = copiaReg(A);
                     aux2B = copiaReg(B);
-                    if(compReg(aux2A, aux2B) == 0) continue;
-                    else{
-                        A = somaReg(A, B);
-                        return A;
-                    }
+                    A = subReg(aux2A, aux2B);
+                    aux2A = copiaReg(A);
+                    aux2B = copiaReg(B);
+                    if(A[1] == 0) return A; //divisão exata
+                    else if(compReg(aux2A,aux2B) == 0) continue;
+                    else return A;
                 }
+            }
             else if(A[0] == 0){ // B negativo
                 B[0]--;
                 while(true){
@@ -285,13 +288,13 @@ public class principal {
         int[] aa = new int [2];
         a[0] = aa[0] = a[1] = aa[1] = 0;
         
-        if(A[0] == 0){
+        if(A[0] == 0){  //sinal
             a[0] = 0;
         } else{
             a[0]++;
         }
         
-        while(true){
+        while(true){    //magnetide
             if(A[1] == 0) break;
             a[1]++;
             aa[1]++;
@@ -310,10 +313,11 @@ public class principal {
     private static int[] subReg(int[] A, int[] B){
         if(A[0] == 0 && B[0] == 0){  //dois positivos
             while(true){
-                if(B[1] == 0) break;
                 A[1]--;
                 B[1]--;
-                if(A[1] == 0){
+                if(B[1] == 0) break;
+                if(A[1] == 0 && B[1] == 0) break;
+                else if(A[1] == 0){
                     A[0]++;
                     while(true){
                         A[1]++;
@@ -347,7 +351,8 @@ public class principal {
             if(B[1] == 0) break;
             A[1]--;
             B[1]--;
-            if(A[1] == 0){
+            if(A[1] == 0 && B[1] == 0) break;
+            else if(A[1] == 0){
                 A[0]--;
                 while(true){
                     A[1]++;
@@ -418,5 +423,5 @@ public class principal {
         
         return C;
     }
-    
+        
 }
