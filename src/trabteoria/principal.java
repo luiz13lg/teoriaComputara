@@ -13,14 +13,14 @@ public class principal {
         int numA[];
         int numB[];
         
-        numA = iniciaReg(31);
-        numB = iniciaReg(2);
+        numA = iniciaReg(1);
+        numB = iniciaReg(1);
         
         if(primoReg(numA) == 0) System.out.println("É primo!");
         else System.out.println("Não é primo!");
     }
     
-    private static int[] iniciaReg(int num){
+    public static int[] iniciaReg(int num){
         int auxNum[] = new int[2];
         
         if(num >= 0){
@@ -35,7 +35,7 @@ public class principal {
         return auxNum;
     }
     
-    private static int[] somaReg(int[] A, int [] B){
+    public static int[] somaReg(int[] A, int [] B){
         if(A[0] == 0 && B[0] == 0){  //dois positivos
             while(true){
                 if(B[1] == 0) break;
@@ -87,7 +87,7 @@ public class principal {
         return A;
     }
     
-    private static short compReg(int[] A, int [] B){    //se 0 A é maior ou igual, se 1 B é maior     
+    public static short compReg(int[] A, int [] B){    //se 0 A é maior ou igual, se 1 B é maior     
         if(A[0] == 0 && B[0] == 0){ //dois positivos
             while(true){
                 A[1]--;
@@ -112,7 +112,7 @@ public class principal {
         }
     }
     
-    private static int[] somaRegP(int[] A, int [] B){
+    public static int[] somaRegP(int[] A, int [] B){
         int C = 0;
         
         if(A[0] == 0 && B[0] == 0){  //dois positivos
@@ -192,7 +192,7 @@ public class principal {
         return A;
     }
 
-    private static int[] multReg(int[]A, int[] B){
+    public static int[] multReg(int[]A, int[] B){
         int C[] = new int[2];
         C[1]=0;
         while(true){
@@ -212,7 +212,7 @@ public class principal {
         return A;
     }
 
-    private static int[] restoDivReg(int[]A, int[] B){
+    public static int[] restoDivReg(int[]A, int[] B){
         int auxA[],auxB[], aux2A[], aux2B[];
         
         auxA = copiaReg(A);
@@ -281,7 +281,7 @@ public class principal {
         return A;
     }
     
-    private static int[] copiaReg(int[] A){
+    public static int[] copiaReg(int[] A){
         int[] a = new int [2];
         int[] aa = new int [2];
         a[0] = aa[0] = a[1] = aa[1] = 0;
@@ -308,11 +308,9 @@ public class principal {
         return a;
     }
     
-    private static int[] subReg(int[] A, int[] B){
+    public static int[] subReg(int[] A, int[] B){
         if(A[0] == 0 && B[0] == 0){  //dois positivos
             while(true){
-                A[1]--;
-                B[1]--;
                 if(B[1] == 0) break;
                 if(A[1] == 0 && B[1] == 0) break;
                 else if(A[1] == 0){
@@ -324,6 +322,8 @@ public class principal {
                     }
                     break;
                 }
+                A[1]--;
+                B[1]--;
             }
             return A;
         }
@@ -362,7 +362,7 @@ public class principal {
         return A;
     }
     
-    private static int[] potenReg(int[]A, int[] B){
+    public static int[] potenReg(int[]A, int[] B){
         int[] C = new int[2];
         int[] D = new int[2];
         
@@ -401,7 +401,7 @@ public class principal {
         return C;
     }
     
-    private static int[] fatReg(int[] A){
+    public static int[] fatReg(int[] A){
         int[] C = new int[2];
         int[] D = new int[2];
         C[1] = D[1] = 0;
@@ -422,13 +422,13 @@ public class principal {
         return C;
     }
     
-    private static int[] AtoB(int[] A,int[] B){
+    public static int[] BtoA(int[] A,int[] B){
         A[1] = 0;
         A = somaRegP(A, B);
-        return B;
+        return A;
     }
     
-    private static int[] zerarReg(int[] A){
+    public static int[] zerarReg(int[] A){
         A[0] = 0;
         while(true){
             A[1]--;
@@ -437,7 +437,7 @@ public class principal {
         return A;
     }
     
-    private static int primoReg(int[] A){
+    public static int primoReg(int[] A){
         int [] auxA;
         int [] divisor = new int[2];
         int [] auxDivisor = new int[2];
@@ -450,6 +450,13 @@ public class principal {
         auxDivisor[1]++;    //
         auxDivisor[1]++;    //
         
+        auxA[1]--;                  //verificando 2
+        auxA[1]--;                  //
+        if(auxA[1] == 0) return 0;  //
+        
+        auxA[1]++;          //devolvendo 2
+        auxA[1]++;          //
+        
         if(restoDivReg(A,divisor)[1] == 0) return 1;        //divindo por 2
 
         while(true){    //apenas divisoes com impares
@@ -461,6 +468,5 @@ public class principal {
             auxA = copiaReg(A); //restaurando valor da auxiliar
         }
         return 0;   //é primo
-    }
-        
+    }      
 }
