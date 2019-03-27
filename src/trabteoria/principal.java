@@ -90,11 +90,11 @@ public class principal {
     public static short compReg(int[] A, int [] B){    //se 0 A é maior ou igual, se 1 B é maior     
         if(A[0] == 0 && B[0] == 0){ //dois positivos
             while(true){
-                A[1]--;
-                B[1]--;
                 if(A[1] == 0 && B[1] == 0) return 0; //iguais
                 if(A[1] == 0) return 1; //B é maior
                 if(B[1] == 0) return 0; //A é maior
+                A[1]--;
+                B[1]--;
             }
         }
         
@@ -450,9 +450,10 @@ public class principal {
         auxDivisor[1]++;    //
         auxDivisor[1]++;    //
         
-        auxA[1]--;                  //verificando 2
         auxA[1]--;                  //
-        if(auxA[1] == 0) return 0;  //
+        if(auxA[1] == 0) return 1;  //verificando 1
+        auxA[1]--;                  //
+        if(auxA[1] == 0) return 0;  //verificando 2
         
         auxA[1]++;          //devolvendo 2
         auxA[1]++;          //

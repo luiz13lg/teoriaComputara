@@ -272,8 +272,9 @@ public class iu_Principal extends javax.swing.JFrame {
                 else resultado.setText("- "+String.valueOf(aux[1]));
             resultadoReg.setText("("+String.valueOf(aux[0])+","+String.valueOf(aux[1])+")");
         }
-//        else if(optAB.isEnabled())
-//            resultado.setText(String.valueOf(metodos.subReg(numA,numB)));            
+        else if(optAB.isSelected())
+            if(principal.compReg(numA,numB) == 0) resultado.setText("A > B");
+            else resultado.setText("A < B");
         else if(optAiB.isSelected())
             if(principal.compReg(numA,numB) == 0) resultado.setText("A >= B");
             else resultado.setText("A < B");
